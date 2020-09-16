@@ -14,7 +14,7 @@ import (
 
 type gzipHandler struct {
 	*Options
-	gzPool sync.Pool
+	gzPool *sync.Pool
 }
 
 func newGzipHandler(level int, options ...Option) *gzipHandler {
@@ -28,7 +28,7 @@ func newGzipHandler(level int, options ...Option) *gzipHandler {
 	}
 	handler := &gzipHandler{
 		Options: DefaultOptions,
-		gzPool:  gzPool,
+		gzPool:  &gzPool,
 	}
 	for _, setter := range options {
 		setter(handler.Options)
